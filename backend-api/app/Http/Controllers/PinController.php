@@ -30,7 +30,7 @@ class PinController extends Controller
      */
     public function create(Request $request)
     {
-        $pinValidator = Validator::make($data, [
+        $pinValidator = Validator::make($request->all(), [
             'note' => ['required', 'string', 'max:255'],
             'media_url' => ['required', 'string', 'max:999'],
             'board_id' => ['required', 'integer']

@@ -4,12 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+
+class Board extends Model
 {
 
-    public function boards()
+    public function user()
     {
-        return $this->hasMany('App\Board');
+        return $this->belongsTo('App\User');
+    }
+
+    public function pins()
+    {
+        return $this->hasMany('App\Pin');
     }
 
     /**
@@ -18,7 +24,7 @@ class User extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'description', 'user_id',
     ];
 
     /**

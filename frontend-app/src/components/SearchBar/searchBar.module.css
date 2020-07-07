@@ -1,0 +1,17 @@
+.__searchBar {
+    background-color: #e2e2e2;
+    border: none;
+    border-radius: 50px;
+    height: 48px;
+    width: 100%;
+    color: rgb(51, 51, 51);
+    font-size: 16px;
+    padding: 0 20px 0 40px;
+    outline: none;
+    margin: 0 10px 0 10px;
+    background-image: url('../../assets/lupa.png');
+    background-repeat: no-repeat;
+    background-size: 23px;
+    background-position-x: 11px;
+    background-position-y: 13px;
+}

@@ -9,7 +9,6 @@ import message from '../../assets/comment-dots-solid.png';
 import user from '../../assets/user-circle-solid.png';
 
 const NavBar = () => {
-
     return (
         <div className={styles.__container}>
             <div className={styles.__wrapper}>

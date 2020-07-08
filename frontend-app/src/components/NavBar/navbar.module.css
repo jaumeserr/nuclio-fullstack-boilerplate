@@ -12,5 +12,4 @@
     display: flex;
     flex-flow: row wrap;
     padding:10px 15px;
-    justify-content: space-around;
 }

@@ -15,3 +15,8 @@
     background-position-x: 11px;
     background-position-y: 13px;
 }
+
+.__searchBar__container {
+    flex-grow: 1;
+    padding-right: 15px;
+}

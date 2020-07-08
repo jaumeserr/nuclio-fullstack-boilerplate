@@ -8,9 +8,10 @@
     outline: none;
     height: 48px;
     width: 48px;
-    background-size: 32px;
+    background-size: 31px;
     background-repeat: no-repeat;
     background-position: center;
+    margin: 0 2px;
 }
 
 .__buttonIcon:hover {

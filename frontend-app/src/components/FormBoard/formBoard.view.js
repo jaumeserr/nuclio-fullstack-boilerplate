@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import styles from './formBoard.module.css';
+import ButtonText from "../ButtonText/buttonText.view";
 
 const FormBoard = () => {
 
@@ -23,7 +24,6 @@ const FormBoard = () => {
 
         const url = 'http://localhost/api/boards/';
         const body = {
-            // name: name
             name,
             description,
             user_id: userId
@@ -41,12 +41,13 @@ const FormBoard = () => {
         fetch(url, options)
             .then(response => {
                 if (response.status >= 200 || response.status < 300) {
-                    console.log(`status: ${response.status}`);
+                    console.log(`Status: ${response.status}`);
                     return response.json();
                 }
                 return Promise.reject(response.status);
             })
             .then(payload => {
+                console.log('Board Saved');
                 console.log(payload);
             })
             .catch(error => console.log(error));
@@ -54,10 +55,14 @@ const FormBoard = () => {
 
     return (
         <div className={styles.__container}>
-            <input type={'text'} placeholder={'Nombre'} onChange={handleChangeName}/>
-            <textarea placeholder={'Descripción'} onChange={handleChangeDescription}></textarea>
-            <input type={'number'} placeholder={'Id'} onChange={handleChangeNumber}/>
-            <input type={'button'} value={'Submit'} onClick={submitDataBoard}/>
+            <h2 className={styles.__title}>Crear tablero</h2>
+            <label className={styles.__label}>Nombre</label>
+            <input className={styles.__input} type={'text'} placeholder={'Como "Lugares para ir" o "Recetas que hacer"'} onChange={handleChangeName}/>
+            <label className={styles.__label}>Descripción</label>
+            <textarea className={styles.__input__textArea} placeholder={'Introduce una breve descripción'} onChange={handleChangeDescription}></textarea>
+            <label className={styles.__label}>Board Id</label>
+            <input className={styles.__input} type={'number'} placeholder={'Id'} onChange={handleChangeNumber}/>
+            <input className={styles.__submit} type={'submit'} value={'Crear'} onClick={submitDataBoard} />
         </div>
     );
 }

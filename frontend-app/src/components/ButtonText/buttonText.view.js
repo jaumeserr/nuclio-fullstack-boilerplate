@@ -1,7 +1,7 @@
 import React from "react";
 import styles from './buttonText.module.css';
 
-const ButtonText = ({backgroundColor, textButton, textColor}) => {
+const ButtonText = ({backgroundColor, type, textButton, textColor}) => {
 
     const styleButton = {
         backgroundColor: backgroundColor,
@@ -11,7 +11,7 @@ const ButtonText = ({backgroundColor, textButton, textColor}) => {
     return (
         <div>
             <input
-                type={'button'}
+                type={type}
                 value={textButton}
                 className={styles.__buttonText}
                 style={styleButton}

@@ -13,8 +13,8 @@ const NavBar = () => {
         <div className={styles.__container}>
             <div className={styles.__wrapper}>
                 <ButtonIcon backgroundImage={logo} />
-                <ButtonText textButton={'Inicio'} backgroundColor={'black'} textColor={'white'} />
-                <ButtonText textButton={'Siguiendo'} />
+                <ButtonText type={'button'} textButton={'Inicio'} backgroundColor={'black'} textColor={'white'} />
+                <ButtonText type={'button'} textButton={'Siguiendo'} />
                 <SearchBar />
                 <ButtonIcon backgroundImage={bell} />
                 <ButtonIcon backgroundImage={message} />

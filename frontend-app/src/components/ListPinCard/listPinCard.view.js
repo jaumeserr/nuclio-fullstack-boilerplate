@@ -15,13 +15,14 @@ const ListPinCard = () => {
 
         fetch(url, options)
             .then(response => {
-                if (response.status === 200) {
+                if (response.status >= 200 || response.status < 300) {
+                    console.log(`Status: ${response.status}`);
                     return response.json();
                 }
                 return Promise.reject(response.status);
             })
             .then(payload => {
-                console.log('saved');
+                console.log(`Received ${payload.length} pins from DB`);
                 setPins(payload);
 
             })
@@ -33,13 +34,15 @@ const ListPinCard = () => {
     return (
         <div className={styles.__container}>
             {pins && pins.map(pin => {
-                const { note, media_url, color } = pin
+                const { note, media_url, color, id, board_id } = pin
 
                 return (
                     <PinCard
+                        key={id}
                         note={note}
-                        media_url={media_url}
+                        mediaUrl={media_url}
                         color={color}
+                        boardId={board_id}
                     />
                 )
             })}

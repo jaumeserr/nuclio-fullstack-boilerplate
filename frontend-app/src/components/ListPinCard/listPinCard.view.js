@@ -1,50 +1,48 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import styles from './listPinCard.module.css';
 import PinCard from "../PinCard/pinCard.view";
 
 const ListPinCard = () => {
+
+    const [pins, setPins] = useState();
+
+    useEffect(() => {
+        const url = 'http://localhost/api/pins';
+        const options = {
+            method: 'GET',
+            header: new Headers(),
+        };
+
+        fetch(url, options)
+            .then(response => {
+                if (response.status === 200) {
+                    return response.json();
+                }
+                return Promise.reject(response.status);
+            })
+            .then(payload => {
+                console.log('saved');
+                setPins(payload);
+
+            })
+            .catch(error => console.log(error));
+    }, [])
+
+
+
     return (
         <div className={styles.__container}>
-            <PinCard image={'https://unsplash.it/236/350'} />
-            <PinCard image={'https://unsplash.it/236/300'} />
-            <PinCard image={'https://unsplash.it/236/220'} />
-            <PinCard image={'https://unsplash.it/236/100'} />
-            <PinCard image={'https://unsplash.it/236/134'} />
-            <PinCard image={'https://unsplash.it/236/205'} />
-            <PinCard image={'https://unsplash.it/236/265'} />
-            <PinCard image={'https://unsplash.it/236/90'} />
-            <PinCard image={'https://unsplash.it/236/110'} />
-            <PinCard image={'https://unsplash.it/236/207'} />
-            <PinCard image={'https://unsplash.it/236/400'} />
-            <PinCard image={'https://unsplash.it/236/102'} />
-            <PinCard image={'https://unsplash.it/236/277'} />
-            <PinCard image={'https://unsplash.it/236/344'} />
-            <PinCard image={'https://unsplash.it/236/188'} />
-            <PinCard image={'https://unsplash.it/236/209'} />
-            <PinCard image={'https://unsplash.it/236/344'} />
-            <PinCard image={'https://unsplash.it/236/188'} />
-            <PinCard image={'https://unsplash.it/236/209'} />
-            <PinCard image={'https://unsplash.it/236/344'} />
-            <PinCard image={'https://unsplash.it/236/188'} />
-            <PinCard image={'https://unsplash.it/236/209'} />
-            <PinCard image={'https://unsplash.it/236/344'} />
-            <PinCard image={'https://unsplash.it/236/188'} />
-            <PinCard image={'https://unsplash.it/236/209'} />
-            <PinCard image={'https://unsplash.it/236/344'} />
-            <PinCard image={'https://unsplash.it/236/188'} />
-            <PinCard image={'https://unsplash.it/236/209'} />
-            <PinCard image={'https://unsplash.it/236/344'} />
-            <PinCard image={'https://unsplash.it/236/188'} />
-            <PinCard image={'https://unsplash.it/236/209'} />
-            <PinCard image={'https://unsplash.it/236/344'} />
-            <PinCard image={'https://unsplash.it/236/188'} />
-            <PinCard image={'https://unsplash.it/236/209'} />
-            <PinCard image={'https://unsplash.it/236/344'} />
-            <PinCard image={'https://unsplash.it/236/188'} />
-            <PinCard image={'https://unsplash.it/236/209'} />
-            <PinCard image={'https://unsplash.it/236/344'} />
-            <PinCard image={'https://unsplash.it/236/188'} />
-            <PinCard image={'https://unsplash.it/236/209'} />
+            {pins && pins.map(pin => {
+                const { note, media_url, color } = pin
+
+                return (
+                    <PinCard
+                        note={note}
+                        media_url={media_url}
+                        color={color}
+                    />
+                )
+            })}
         </div>
     );
 };

@@ -8,3 +8,7 @@
 .__image {
     border-radius: 16px;
 }
+
+.__text {
+    color: black;
+}

@@ -5,6 +5,7 @@ import ListPinCard from "../../components/ListPinCard/listPinCard.view";
 import FormBoard from "../../components/FormBoard/formBoard.view";
 import PinBoard from "../../components/PinBoard/pinBoard.view";
 import ListBoards from "../ListBoards/listBoards.view";
+import Login from "../../components/Login/login.view";
 
 const Home = () => {
     
@@ -12,6 +13,7 @@ const Home = () => {
         <div className={styles.__container}>
             <NavBar />
             <ListPinCard />
+            <Login />
             <ListBoards />
             <FormBoard />
             <PinBoard />

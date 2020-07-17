@@ -16,13 +16,13 @@ const ListPinCard = () => {
         fetch(url, options)
             .then(response => {
                 if (response.status >= 200 || response.status < 300) {
-                    console.log(`Status: ${response.status}`);
+                    // console.log(`Status: ${response.status}`);
                     return response.json();
                 }
                 return Promise.reject(response.status);
             })
             .then(payload => {
-                console.log(`Received ${payload.length} pins from DB`);
+                // console.log(`Received ${payload.length} pins from DB`);
                 setPins(payload);
 
             })

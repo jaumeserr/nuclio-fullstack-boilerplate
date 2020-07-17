@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Board;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
+    
     /**
      * Show a list of all of the application's users.
      *
@@ -33,12 +36,13 @@ class UserController extends Controller
             'last_name' =>$request->last_name,
             'email' =>$request->email,
             'username' =>$request->username,
-            'password' =>$request->password,
+            'password' =>bcrypt($request->password),
             'bio' =>$request->bio,
+            'email_verified_at' => $request->email_verified_at
         ]);
 
         $user->save();
-        return response()->json('Created', 201);
+        return response()->json(["userCreated" => $user, "Message" => "User created successfully"], 201);
     }
 
     /**
@@ -85,11 +89,16 @@ class UserController extends Controller
      */
     public function updateById(Request $request, $id)
     {
-        Log::info('Updated user with id: ' .$id);
-        $user = User::where('id', $id)->first();
-        $dataFromTheUserUpdated = $request->all();
-        $user->update($dataFromTheUserUpdated);
-        return response()->json($user);
+        if(User::where('id', $id)->count() == 0) {
+            $code = Response::HTTP_NOT_ACCEPTABLE; // 406
+            return response()->json(['error' => 'User Id does not exist', 'code' => $code], $code);
+        } else {
+            Log::info('Updated user with id: ' .$id);
+            $user = User::where('id', $id)->first();
+            $dataFromTheUserUpdated = $request->all();
+            $user->update($dataFromTheUserUpdated);
+            return response()->json(["userUpdated" => $user, "Message" => "User updated successfully"]);
+        }
     }
 
     /**
@@ -100,9 +109,14 @@ class UserController extends Controller
      */
     public function deleteById($id)
     {
-        Log::info('Deleted user with id: ' .$id);
-        $user = User::where('id', $id)->first();
-        $user->delete();
-        return response()->json('User deleted successfully');
+        if(User::where('id', $id)->count() == 0) {
+            $code = Response::HTTP_NOT_ACCEPTABLE; // 406
+            return response()->json(['error' => 'User Id does not exist', 'code' => $code], $code);
+        } else {
+            Log::info('Deleted user with id: ' .$id);
+            $user = User::where('id', $id)->first();
+            $user->delete();
+            return response()->json(["userDeleted" => $user, "Message" => "User deleted successfully"]);
+        }
     }
 }

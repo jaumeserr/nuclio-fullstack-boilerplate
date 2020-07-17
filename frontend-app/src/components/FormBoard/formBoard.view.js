@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import styles from './formBoard.module.css';
-import ButtonText from "../ButtonText/buttonText.view";
 
 const FormBoard = () => {
 
@@ -60,7 +59,7 @@ const FormBoard = () => {
             <input className={styles.__input} type={'text'} placeholder={'Como "Lugares para ir" o "Recetas que hacer"'} onChange={handleChangeName}/>
             <label className={styles.__label}>Descripción</label>
             <textarea className={styles.__input__textArea} placeholder={'Introduce una breve descripción'} onChange={handleChangeDescription}></textarea>
-            <label className={styles.__label}>Board Id</label>
+            <label className={styles.__label}>User Id</label>
             <input className={styles.__input} type={'number'} placeholder={'Id'} onChange={handleChangeNumber}/>
             <input className={styles.__submit} type={'submit'} value={'Crear'} onClick={submitDataBoard} />
         </div>

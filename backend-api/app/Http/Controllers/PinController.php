@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Board;
 use App\Pin;
 use Validator;
 use Illuminate\Http\Response;
@@ -50,7 +51,7 @@ class PinController extends Controller
         ]);
 
         $pin->save();
-        return response()->json("Created", 201);
+        return response()->json(["pinCreated" => $pin, "Message" => "Pin created successfully"], 201);
     }
 
     /**
@@ -86,11 +87,16 @@ class PinController extends Controller
      */
     public function updateById(Request $request, $id)
     {
-        Log::info('Updated pin with id: ' .$id);
-        $pin = Pin::where('id', $id)->first();
-        $dataFromThePinUpdated = $request->all();
-        $pin->update($dataFromThePinUpdated);
-        return response()->json($pin);
+        if(Board::where('id', $request->board_id)->count() == 0) {
+            $code = Response::HTTP_NOT_ACCEPTABLE; // 406
+            return response()->json(['error' => 'Board Id does not exist', 'code' => $code], $code);
+        } else {
+            Log::info('Updated pin with id: ' .$id);
+            $pin = Pin::where('id', $id)->first();
+            $dataFromThePinUpdated = $request->all();
+            $pin->update($dataFromThePinUpdated);
+            return response()->json(["pinUpdated" => $pin, "Message" => "Pin updated successfully"]);
+        }
     }
 
     /**
@@ -101,9 +107,30 @@ class PinController extends Controller
      */
     public function deleteById($id)
     {
-        Log::info('Deleted pin with id: ' .$id);
-        $pin = Pin::where('id', $id)->first();
-        $pin->delete();
-        return response()->json('Pin deleted successfully');
+        if(Pin::where('id', $id)->count() == 0) {
+            $code = Response::HTTP_NOT_ACCEPTABLE; // 406
+            return response()->json(['error' => 'Pin Id does not exist', 'code' => $code], $code);
+        } else {
+            Log::info('Deleted pin with id: ' .$id);
+            $pin = Pin::where('id', $id)->first();
+            $pin->delete();
+            return response()->json(["pinDeleted" => $pin, "Message" => "Pin deleted successfully"]);
+        }
+    }
+
+    /**
+     * Show a list of all the pins that matches the search
+     *
+     * @param $query
+     * @return JsonResponse
+     */
+    public function search($query)
+    {
+        Log::info('Retrieving all pins related to -> ' . $query);
+        $pins = Pin::where('note', 'LIKE', '%' . $query . '%')
+            ->orWhere('color', 'LIKE', '%' . $query . '%')->get();
+
+        Log::info('Retrieving query -> ' . $pins);
+        return response()->json($pins);
     }
 }

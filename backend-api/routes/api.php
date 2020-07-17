@@ -34,7 +34,7 @@ Route::get('boards', 'BoardController@all');
 Route::post('boards', 'BoardController@create');
 Route::get('boards/{id}', 'BoardController@getById');
 Route::get('boards/user/{userId}', 'BoardController@getByUser');
-Route::put('boards/{id}', 'BoardController@udpateById');
+Route::put('boards/{id}', 'BoardController@updateById');
 Route::delete('boards/{id}', 'BoardController@deleteById');
 
 /*
@@ -46,5 +46,31 @@ Route::get('pins', 'PinController@all');
 Route::post('pins/', 'Pincontroller@create');
 Route::get('pins/{id}', 'PinController@getById');
 Route::get('pins/board/{boardId}', 'PinController@getByBoard');
-Route::put('pins/{id}', 'PinController@udpateById');
+Route::put('pins/{id}', 'PinController@updateById');
 Route::delete('pins/{id}', 'PinController@deleteById');
+
+/*
+|--------------------------------------------------------------------------
+| Generic Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('search/{query}', 'PinController@search');
+
+/*
+|--------------------------------------------------------------------------
+| Jwt Routes
+|--------------------------------------------------------------------------
+*/
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
+
+});

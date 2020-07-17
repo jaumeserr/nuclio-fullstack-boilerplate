@@ -13,3 +13,8 @@
 .__buttonText:hover {
     background-color: #f0f0f0;
 }
+
+.__buttonText:active {
+    background-color: black;
+    color: white;
+}

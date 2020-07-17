@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Board;
+use App\Pin;
+use App\User;
 use Illuminate\Http\Response;
 use Validator;
 use Illuminate\Http\JsonResponse;
@@ -32,7 +34,6 @@ class BoardController extends Controller
     {
         $boardValidator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string', 'max:255'],
             'user_id' => ['required', 'integer']
         ]);
 
@@ -42,14 +43,19 @@ class BoardController extends Controller
             return response()->json(['error' => $errors, 'code' => $code], $code);
         }
 
-        $board = Board::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'user_id' => $request->user_id,
-        ]);
+        if(User::where('id', $request->user_id)->count() == 0) {
+            $code = Response::HTTP_NOT_ACCEPTABLE; // 406
+            return response()->json(['error' => 'User Id does not exist', 'code' => $code], $code);
+        } else {
+            $board = Board::create([
+                'name' => $request->name,
+                'description' => $request->description,
+                'user_id' => $request->user_id,
+            ]);
 
-        $board->save();
-        return response()->json("Created", 201);
+            $board->save();
+            return response()->json(["boardCreated" => $board, "Message" => "Board created successfully"], 201);
+        }
     }
 
     /**
@@ -89,7 +95,7 @@ class BoardController extends Controller
         $board = Board::where('id', $id)->first();
         $dataFromTheBoardUpdated = $request->all();
         $board->update($dataFromTheBoardUpdated);
-        return response()->json($board);
+        return response()->json(["boardUpdated" => $board, "Message" => "Board updated successfully"]);
     }
 
     /**
@@ -100,9 +106,14 @@ class BoardController extends Controller
      */
     public function deleteById($id)
     {
-        Log::info('Deleted board by id: ' .$id);
-        $board = Board::where('id', $id)->first();
-        $board->delete();
-        return response()->json('Board deleted successfully');
+        if(Board::where('id', $id)->count() == 0) {
+            $code = Response::HTTP_NOT_ACCEPTABLE; // 406
+            return response()->json(['error' => 'Board Id does not exist', 'code' => $code], $code);
+        } else {
+            Log::info('Deleted board by id: ' .$id);
+            $board = Board::where('id', $id)->first();
+            $board->delete();
+            return response()->json(["boardDeleted" => $board, "Message" => "Board deleted successfully"]);
+        }
     }
 }

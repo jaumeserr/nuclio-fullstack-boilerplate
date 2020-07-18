@@ -43,6 +43,7 @@ const ListBoards = () => {
     
     return (
         <div className={styles.__container}>
+            <CreatePopup />
             <User />
             <div className={styles.__toolBar}>
                 <ButtonIcon backgroundImage={Edit} />
@@ -55,7 +56,6 @@ const ListBoards = () => {
                 {/* <ButtonIcon backgroundImage={Add} handleClick={setOpen}/> */}
                 <ButtonIcon backgroundImage={Add} />
             </div>
-            <CreatePopup />
             <div className={styles.__listBoards}>
                 {listBoards && listBoards.map(listBoard => {
                     const { id, name, pins } = listBoard

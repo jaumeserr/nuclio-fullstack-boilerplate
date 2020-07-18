@@ -9,6 +9,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [token, setToken] = useState({});
     const [reloadToken, setReloadToken] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState('');
 
     useEffect(() => {
         const tokenLS = getToken();
@@ -29,7 +30,6 @@ const Login = () => {
     }
 
     const submitUserData = () => {
-
         const url = 'http://localhost/api/auth/login';
         const body = {
             email: email,
@@ -40,7 +40,6 @@ const Login = () => {
             method: 'POST',
             headers: new Headers({
                 'Content-type': 'application/json',
-                'authorization': `Bearer ${getToken()}`
             }),
             body: JSON.stringify(body),
             mode: 'cors',
@@ -58,13 +57,15 @@ const Login = () => {
                 console.log(payload);
                 console.log(payload.access_token);
                 setJWT(payload.access_token);
+                setIsLoggedIn(payload.access_token);
             })
             .catch(error => console.log(error));
     }
 
     return(
         <div className={styles.__container}>
-            <img src={PinterestLogo} className={styles.__logo}/>
+            { isLoggedIn ? 'Logueado' : 'No Logueado' }
+            <img src={PinterestLogo} className={styles.__logo} alt={'Pinterest'}/>
             <p className={styles.__title}>Bienvenido a Pinterest</p>
             <div className={styles.__wrapperForm}>
                 <input
@@ -92,7 +93,6 @@ const Login = () => {
                     value={'Logout'}
                     className={styles.__submit}
                 />
-                <p className={styles.__conditions}>Al continuar, aceptas los <strong>Términos del servicio</strong>, la <strong>Política de privacidad</strong> y el <strong>uso de cookies</strong> de Pinterest.</p>
             </div>
         </div>
     );

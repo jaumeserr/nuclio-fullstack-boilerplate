@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import styles from "../FormBoard/formBoard.module.css";
+import styles from "../BoardForm/boardForm.module.css";
 
-const PinBoard = () => {
+const PinForm = () => {
 
     const [note, setNote] = useState('');
     const [mediaUrl, setMediaUrl] = useState('');
@@ -107,4 +107,4 @@ const PinBoard = () => {
     );
 };
 
-export default PinBoard;
+export default PinForm;

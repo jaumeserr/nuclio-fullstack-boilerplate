@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import styles from './formBoard.module.css';
+import styles from './boardForm.module.css';
 
-const FormBoard = () => {
+const BoardForm = () => {
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -66,4 +66,4 @@ const FormBoard = () => {
     );
 }
 
-export default FormBoard;
+export default BoardForm;

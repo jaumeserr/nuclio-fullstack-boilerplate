@@ -1,12 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import styles from "./userBoards.module.css";
-import ButtonIcon from "../ButtonIcon/buttonIcon.view";
-import Edit from "../../assets/pen-solid.png";
-import Share from "../../assets/share-alt-solid.png";
-import ButtonText from "../ButtonText/buttonText.view";
-import Settings from "../../assets/sliders-h-solid.png";
-import Add from "../../assets/plus-solid.png";
-import CreatePopup from "../CreatePopup/createPopup.view";
 
 const UserBoards = () => {
     const [listBoards, setListBoards] = useState('');
@@ -35,16 +28,7 @@ const UserBoards = () => {
 
     return(
         <div className={styles.__container}>
-            <div className={styles.__toolBar}>
-                <ButtonIcon backgroundImage={Edit} />
-                <ButtonIcon backgroundImage={Share} />
-                <div className={styles.__toolBar__center}>
-                    <ButtonText type={'button'} textButton={'Tableros'} backgroundColor={'black'} textColor={'white'} />
-                    <ButtonText type={'button'} textButton={'Pines'} />
-                </div>
-                <ButtonIcon backgroundImage={Settings} />
-                <ButtonIcon backgroundImage={Add} />
-            </div>
+
             <div className={styles.__listBoards}>
                 {listBoards && listBoards.map(listBoard => {
                     const { id, name, pins } = listBoard
@@ -63,7 +47,6 @@ const UserBoards = () => {
                     );
                 })}
             </div>
-            <CreatePopup />
         </div>
     );
 };

@@ -12,6 +12,9 @@ import {
     Route,
     Link
 } from "react-router-dom";
+import UserBoards from "../../components/UserBoards/userBoards.view";
+import UserInfo from "../../components/UserInfo/userInfo.view";
+import UserActions from "../../components/UserActions/useractions.view";
 
 const Home = () => {
     return (
@@ -31,6 +34,16 @@ const Home = () => {
                         </Route>
                         <Route path="/board-builder">
                             <BoardForm />
+                        </Route>
+                        <Route path="/pin-user">
+                            <UserInfo />
+                            <UserActions />
+                            <ListPinCard />
+                        </Route>
+                        <Route path="/board-user">
+                            <UserInfo />
+                            <UserActions />
+                            <UserBoards />
                         </Route>
                     </Switch>
                 </div>

@@ -2,22 +2,40 @@ import React from "react";
 import styles from './home.module.css';
 import NavBar from "../../components/NavBar/navbar.view";
 import ListPinCard from "../../components/ListPinCard/listPinCard.view";
-import FormBoard from "../../components/BoardForm/boardForm.view";
-import PinBoard from "../../components/PinForm/pinForm.view";
-import ListBoards from "../ListBoards/listBoards.view";
 import Login from "../../components/Login/login.view";
+import PinForm from "../../components/PinForm/pinForm.view";
+import BoardForm from "../../components/BoardForm/boardForm.view";
+import User from "../User/user.view";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
 
 const Home = () => {
-    
     return (
-        <div className={styles.__container}>
-            <NavBar />
-            <ListPinCard />
-            <Login />
-            <ListBoards />
-            <FormBoard />
-            <PinBoard />
-        </div>
+        <Router>
+            <div>
+                <NavBar />
+                <div className={styles.__space}>
+                    <Switch>
+                        <Route exact path="/">
+                            <ListPinCard />
+                        </Route>
+                        <Route path="/user">
+                            <User />
+                        </Route>
+                        <Route path="/pin-builder">
+                            <PinForm />
+                        </Route>
+                        <Route path="/board-builder">
+                            <BoardForm />
+                        </Route>
+                    </Switch>
+                </div>
+            </div>
+        </Router>
     );
 };
 

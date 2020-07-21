@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import styles from './user.module.css';
+import styles from './userInfo.module.css';
 import userImg from '../../assets/user-circle-solid.png';
 
-const User = () => {
+const UserInfo = () => {
 
     const [user, setUser] = useState('')
 
     useEffect(() => {
-        const url = 'http://localhost/api/users/1';
+        const url = 'http://localhost/api/users/21';
         const options = {
             method: 'GET',
             header: new Headers(),
@@ -23,14 +23,13 @@ const User = () => {
                 return Promise.reject(response.status);
             })
             .then(payload => {
-                console.log(`Received ${payload.length} users from DB`);
                 console.log(payload);
                 setUser(payload);
             })
             .catch(error => console.log(error));
     }, []);
 
-    const { bio, email, first_name, last_name, username } = user
+    const { username } = user
 
     return (
         <div className={styles.__container}>
@@ -41,4 +40,4 @@ const User = () => {
     );
 };
 
-export default User;
+export default UserInfo;

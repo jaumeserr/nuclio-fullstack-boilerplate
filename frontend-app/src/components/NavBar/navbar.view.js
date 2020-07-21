@@ -7,33 +7,19 @@ import logo from '../../assets/pinterest_logo.png';
 import bell from '../../assets/bell-solid.png';
 import message from '../../assets/comment-dots-solid.png';
 import user from '../../assets/user-circle-solid.png';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    useParams
-} from 'react-router-dom';
-import ListBoards from "../../pages/ListBoards/listBoards.view";
-import ListPinCard from "../ListPinCard/listPinCard.view";
+import { Link } from 'react-router-dom';
 
 const NavBar = () => {
     return (
         <div className={styles.__container}>
             <div className={styles.__wrapper}>
-                <Router>
-                    <Link to={'/'}><ButtonIcon backgroundImage={logo} /></Link>
-                    <ButtonText type={'button'} textButton={'Inicio'} backgroundColor={'black'} textColor={'white'} />
-                    <ButtonText type={'button'} textButton={'Siguiendo'} />
-                    <SearchBar />
-                    <ButtonIcon backgroundImage={bell} />
-                    <ButtonIcon backgroundImage={message} />
-                    <Link to={'/boards'}><ButtonIcon backgroundImage={user} /></Link>
-                    <Switch>
-                        <Route path={'/'} children={<ListPinCard />} />
-                        <Route path="/boards" children={<ListBoards />} />
-                    </Switch>
-                </Router>
+                <Link to="/"><ButtonIcon backgroundImage={logo} /></Link>
+                <ButtonText type={'button'} textButton={'Inicio'} backgroundColor={'black'} textColor={'white'} />
+                <ButtonText type={'button'} textButton={'Siguiendo'} />
+                <SearchBar />
+                <ButtonIcon backgroundImage={bell} />
+                <ButtonIcon backgroundImage={message} />
+                <Link to="/user"><ButtonIcon backgroundImage={user} /></Link>
             </div>
         </div>
     );

@@ -6,17 +6,11 @@ import BoardForm from "../BoardForm/boardForm.view";
 
 const CreatePopup = () => {
     return (
-        <Router>
-            <div className={styles.__container}>
-                <p className={styles.__title}>Crear</p>
-                <Link to={'/pinform'} className={styles.__link}><a>Pin</a></Link>
-                <Link to={'/boardform'} className={styles.__link}><a>Tablero</a></Link>
-                <Switch>
-                    <Route path={'/pinform'} children={<PinForm />} />
-                    <Route path={'/boardform'} children={<BoardForm />} />
-                </Switch>
-            </div>
-        </Router>
+        <div className={styles.__container}>
+            <p className={styles.__title}>Crear</p>
+            <Link to="/pin-builder" className={styles.__link}>Pin</Link>
+            <Link to="/board-builder" className={styles.__link}>Tablero</Link>
+        </div>
     );
 };
 

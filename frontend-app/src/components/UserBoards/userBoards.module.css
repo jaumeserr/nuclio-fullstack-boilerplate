@@ -1,6 +1,9 @@
 .__container {
     text-align: center;
     width: 100%;
+    position: relative;
+
+
 }
 
 .__listBoards {

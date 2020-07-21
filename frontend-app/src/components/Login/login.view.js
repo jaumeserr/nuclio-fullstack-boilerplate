@@ -9,7 +9,6 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [token, setToken] = useState({});
     const [reloadToken, setReloadToken] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState('');
 
     useEffect(() => {
         const tokenLS = getToken();
@@ -57,14 +56,12 @@ const Login = () => {
                 console.log(payload);
                 console.log(payload.access_token);
                 setJWT(payload.access_token);
-                setIsLoggedIn(payload.access_token);
             })
             .catch(error => console.log(error));
     }
 
     return(
         <div className={styles.__container}>
-            { isLoggedIn ? 'Logueado' : 'No Logueado' }
             <img src={PinterestLogo} className={styles.__logo} alt={'Pinterest'}/>
             <p className={styles.__title}>Bienvenido a Pinterest</p>
             <div className={styles.__wrapperForm}>

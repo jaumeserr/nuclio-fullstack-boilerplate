@@ -1,8 +1,6 @@
 import React from 'react';
 import styles from './createPopup.module.css';
-import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
-import PinForm from "../PinForm/pinForm.view";
-import BoardForm from "../BoardForm/boardForm.view";
+import { Link } from "react-router-dom";
 
 const CreatePopup = () => {
     return (

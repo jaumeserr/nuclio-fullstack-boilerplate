@@ -7,23 +7,43 @@ import ButtonText from "../ButtonText/buttonText.view";
 import Settings from "../../assets/sliders-h-solid.png";
 import Add from "../../assets/plus-solid.png";
 import CreatePopup from "../CreatePopup/createPopup.view";
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch, Switch, Route } from 'react-router-dom';
+import UserBoards from "../UserBoards/userBoards.view";
+import ListPinCard from "../ListPinCard/listPinCard.view";
 
 const UserActions = () => {
+
+    let { path, url } = useRouteMatch();
+
     return (
         <div className={styles.__container}>
             <div className={styles.__toolBar}>
                 <ButtonIcon backgroundImage={Edit} />
                 <ButtonIcon backgroundImage={Share} />
                 <div className={styles.__toolBar__center}>
-                    <Link to="/board-user"><ButtonText type={'button'} textButton={'Tableros'} backgroundColor={'black'} textColor={'white'} /></Link>
-                    <Link to="/pin-user"><ButtonText type={'button'} textButton={'Pines'} /></Link>
+                    <Link to={`${url}/boards`}>
+                        <ButtonText type={'button'} textButton={'Tableros'} backgroundColor={'black'} textColor={'white'} />
+                    </Link>
+                    <Link to={`${url}/pins`}>
+                        <ButtonText type={'button'} textButton={'Pines'} />
+                    </Link>
                 </div>
                 <ButtonIcon backgroundImage={Settings} />
                 <ButtonIcon backgroundImage={Add} />
             </div>
             <CreatePopup />
+
+            <Switch>
+                <Route path={`${path}/boards`}>
+                    <UserBoards />
+                </Route>
+                <Route path={`${path}/pins`}>
+                    <ListPinCard />
+                </Route>
+            </Switch>
         </div>
+
+
     );
 };
 

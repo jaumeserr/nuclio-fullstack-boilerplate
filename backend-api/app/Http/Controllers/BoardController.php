@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Board;
-use App\Pin;
 use App\User;
 use Illuminate\Http\Response;
 use Validator;
@@ -79,7 +78,7 @@ class BoardController extends Controller
     public function getByUser($userId)
     {
         Log::info('Retrieving boards with user id: '.$userId);
-        $boards = Board::where('user_id', $userId)->get();
+        $boards = Board::where('user_id', $userId)->with('pins')->get();
         return response()->json($boards);
     }
 

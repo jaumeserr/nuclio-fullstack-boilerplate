@@ -29,6 +29,7 @@ const Login = () => {
     }
 
     const submitUserData = () => {
+
         const url = 'http://localhost/api/auth/login';
         const body = {
             email: email,
@@ -53,8 +54,6 @@ const Login = () => {
                 return Promise.reject(response.status);
             })
             .then(payload => {
-                console.log(payload);
-                console.log(payload.access_token);
                 setJWT(payload.access_token);
             })
             .catch(error => console.log(error));
@@ -84,12 +83,15 @@ const Login = () => {
                     value={'Iniciar Sesión'}
                     onClick={submitUserData}
                 />
-                <input
-                    type={'submit'}
-                    onClick={removeToken}
-                    value={'Logout'}
-                    className={styles.__submit}
-                />
+                {
+                    localStorage.getItem('JWT_KEY') &&
+                    <input
+                        type={'submit'}
+                        onClick={removeToken}
+                        value={'Logout'}
+                        className={styles.__submit}
+                    />
+                }
             </div>
         </div>
     );

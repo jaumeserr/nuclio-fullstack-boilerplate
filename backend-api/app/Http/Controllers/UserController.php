@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Board;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -11,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
-    
+
     /**
      * Show a list of all of the application's users.
      *
@@ -21,6 +20,7 @@ class UserController extends Controller
     {
         Log::info('Retrieving all user profiles');
         return response()->json(User::with('boards')->get());
+
     }
 
     /**

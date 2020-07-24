@@ -16,45 +16,74 @@
 | User Routes
 |--------------------------------------------------------------------------
 */
+Route::group([
 
-Route::get('users', 'UserController@all');
-Route::post('users', 'UserController@create');
-Route::get('users/{id}', 'UserController@getById');
-Route::get('users/email/{email}', 'UserController@getByEmail');
-Route::get('users/username/{username}', 'UserController@getByUsername');
-Route::put('users/{id}', 'UserController@updateById');
-Route::delete('users/{id}', 'UserController@deleteById');
+    'prefix' => 'users'
+
+], function ($router) {
+
+    Route::get('', 'UserController@all');
+    Route::post('', 'UserController@create');
+    Route::get('{id}', 'UserController@getById');
+    Route::get('email/{email}', 'UserController@getByEmail');
+    Route::get('username/{username}', 'UserController@getByUsername');
+    Route::put('{id}', 'UserController@updateById');
+    Route::delete('{id}', 'UserController@deleteById');
+});
 
 /*
 |--------------------------------------------------------------------------
 | Board Routes
 |--------------------------------------------------------------------------
 */
-Route::get('boards', 'BoardController@all');
-Route::post('boards', 'BoardController@create');
-Route::get('boards/{id}', 'BoardController@getById');
-Route::get('boards/user/{userId}', 'BoardController@getByUser');
-Route::put('boards/{id}', 'BoardController@updateById');
-Route::delete('boards/{id}', 'BoardController@deleteById');
+Route::group([
+
+    'prefix' => 'boards'
+
+], function ($router) {
+
+    Route::get('', 'BoardController@all');
+    Route::post('', 'BoardController@create');
+    Route::get('{id}', 'BoardController@getById');
+    Route::get('user/{userId}', 'BoardController@getByUser');
+    Route::put('{id}', 'BoardController@updateById');
+    Route::delete('{id}', 'BoardController@deleteById');
+
+});
 
 /*
 |--------------------------------------------------------------------------
 | Pin Routes
 |--------------------------------------------------------------------------
 */
-Route::get('pins', 'PinController@all');
-Route::post('pins/', 'Pincontroller@create');
-Route::get('pins/{id}', 'PinController@getById');
-Route::get('pins/board/{boardId}', 'PinController@getByBoard');
-Route::put('pins/{id}', 'PinController@updateById');
-Route::delete('pins/{id}', 'PinController@deleteById');
+Route::group([
+
+    'prefix' => 'pins'
+
+], function ($router) {
+
+    Route::get('', 'PinController@all');
+    Route::post('', 'Pincontroller@create');
+    Route::get('{id}', 'PinController@getById');
+    Route::get('board/{boardId}', 'PinController@getByBoard');
+    Route::put('{id}', 'PinController@updateById');
+    Route::delete('{id}', 'PinController@deleteById');
+
+});
 
 /*
 |--------------------------------------------------------------------------
-| Generic Routes
+| Search Routes
 |--------------------------------------------------------------------------
 */
-Route::get('search/{query}', 'PinController@search');
+Route::group([
+
+    'prefix' => 'search'
+
+], function ($router) {
+
+    Route::get('{query}', 'PinController@search');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -63,7 +92,6 @@ Route::get('search/{query}', 'PinController@search');
 */
 Route::group([
 
-    'middleware' => 'api',
     'prefix' => 'auth'
 
 ], function ($router) {

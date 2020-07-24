@@ -6,12 +6,14 @@ import PinForm from "../../components/PinForm/pinForm.view";
 import BoardForm from "../../components/BoardForm/boardForm.view";
 import User from "../User/user.view";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Login from "../../components/Login/login.view";
 
 const Home = () => {
     return (
         <Router>
             <div>
                 <NavBar />
+
                 <div className={styles.__space}>
                     <Switch>
                         <Route exact path="/">

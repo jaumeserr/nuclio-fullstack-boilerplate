@@ -35,7 +35,10 @@ const UserBoards = () => {
                     return(
                         <div key={id}>
                             <div className={styles.__container__board}>
-                                <div className={styles.__container__board__img01}></div>
+                                <div 
+                                    className={styles.__container__board__img01}
+                                    style={{ backgroundImage: `url(${listBoards[2].pins[0].media_url})` }} >
+                                </div>
                                 <div>
                                     <div className={styles.__container__board__img02}></div>
                                     <div className={styles.__container__board__img03}></div>

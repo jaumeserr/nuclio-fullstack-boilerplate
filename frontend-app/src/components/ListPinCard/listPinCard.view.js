@@ -22,8 +22,8 @@ const ListPinCard = () => {
                 return Promise.reject(response.status);
             })
             .then(payload => {
-                // console.log(`Received ${payload.length} pins from DB`);
                 setPins(payload);
+                console.log(payload);
 
             })
             .catch(error => console.log(error));

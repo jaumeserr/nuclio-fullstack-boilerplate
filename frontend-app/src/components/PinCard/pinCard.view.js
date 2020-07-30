@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from './pinCard.module.css';
+import PinCardActionsView from "./PinCardActionsView/pinCardActions.view";
 
 const PinCard = ({note, mediaUrl, color, boardId}) => {
 
@@ -9,11 +10,18 @@ const PinCard = ({note, mediaUrl, color, boardId}) => {
         borderColor: color
     }
 
+    const [isHovered, setIsHovered] = useState(false);
+
     return (
-        <div className={styles.__container}>
-            <img alt={'pinterest'} className={styles.__image} src={mediaUrl} style={borderImg}/>
-            <p className={styles.__text}><strong>Nombre Pin:</strong> {note}</p>
-            <p className={styles.__text}><strong>Board Id:</strong> {boardId}</p>
+        <div 
+            className={styles.__container}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            <div className={styles.__image__container}>
+                <img src={mediaUrl} className={styles.__image} style={borderImg} alt="pinImage"/>
+                { isHovered && <PinCardActionsView note={note} boardId={boardId} mediaUrl={mediaUrl} /> }
+            </div>
         </div>
     );
 };

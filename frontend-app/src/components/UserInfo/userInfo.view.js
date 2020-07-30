@@ -35,7 +35,7 @@ const UserInfo = () => {
         <div className={styles.__container}>
             <img src={userImg} className={styles.__image}/>
             <p className={styles.__title}>{username}</p>
-            <p className={styles.__subtitle}>1 seguidor · Siguiendo a 5</p>
+            {/* <p className={styles.__subtitle}>1 seguidor · Siguiendo a 5</p> */}
         </div>
     );
 };

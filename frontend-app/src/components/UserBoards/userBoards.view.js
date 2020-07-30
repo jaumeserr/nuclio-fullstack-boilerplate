@@ -22,13 +22,13 @@ const UserBoards = () => {
             })
             .then(payload => {
                 setListBoards(payload);
+                console.log(payload);
             })
             .catch(error => console.log(error));
     }, []);
 
     return(
         <div className={styles.__container}>
-
             <div className={styles.__listBoards}>
                 {listBoards && listBoards.map(listBoard => {
                     const { id, name, pins } = listBoard
@@ -41,8 +41,8 @@ const UserBoards = () => {
                                     <div className={styles.__container__board__img03}></div>
                                 </div>
                             </div>
-                            <p className={styles.__title}></p>
-                            <p className={styles.__subtitle}>Pins</p>
+                            <p className={styles.__title}>{name}</p>
+                            <p className={styles.__subtitle}>{pins.length} Pins</p>
                         </div>
                     );
                 })}
